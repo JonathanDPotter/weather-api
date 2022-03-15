@@ -8,7 +8,7 @@ import { saveState } from "./store/localStorage";
 // components
 import Router from "./Router";
 // styles
-import "./index.css";
+import "./index.scss";
 
 // saves redux state to local storage
 store.subscribe(() => saveState(store.getState()));
