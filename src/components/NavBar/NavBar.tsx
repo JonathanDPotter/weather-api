@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 // utils
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setNavCoords, zipOrNav } from "../../store/locationReducer";
+import {
+  setNavCoords,
+  setSelectedLocation,
+  zipOrNav,
+} from "../../store/locationReducer";
 import api from "../../api";
 import Icoords from "../../interfaces/coords";
 // components
@@ -13,12 +17,13 @@ import "./NavBar.scss";
 const NavBar = () => {
   // redux store dispatch and coords access
   const dispatch = useAppDispatch();
-  const { navCoords, zipCoords } = useAppSelector((state) => state.location);
+  const { navCoords, zipCoords, selectedLocation } = useAppSelector(
+    (state) => state.location
+  );
 
   // local state
   const [showLocationModal, setShowLocationModal] = useState(false);
   const [locationString, setLocationString] = useState<string | null>(null);
-  const [coordsToUse, setCoordsToUse] = useState(zipOrNav.Nav);
 
   const getCoordsFromNavigator = () => {
     navigator.geolocation.getCurrentPosition((response) => {
@@ -34,7 +39,7 @@ const NavBar = () => {
   };
 
   const getCity = (location: Icoords) => {
-    console.log("getCity ", location)
+    console.log("getCity ", location);
     api.geoapify
       .getCity(location.latitude, location.longitude)
       .then((city) => city && setLocationString(city))
@@ -44,12 +49,12 @@ const NavBar = () => {
   useEffect(() => {
     if (!navCoords) getCoordsFromNavigator();
 
-    if (navCoords && coordsToUse === zipOrNav.Nav) getCity(navCoords);
+    if (navCoords && selectedLocation === zipOrNav.Nav) getCity(navCoords);
 
-    if (zipCoords && coordsToUse === zipOrNav.Zip) getCity(zipCoords);
+    if (zipCoords && selectedLocation === zipOrNav.Zip) getCity(zipCoords);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navCoords, zipCoords, coordsToUse]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navCoords, zipCoords, selectedLocation]);
 
   return (
     <header>
@@ -59,12 +64,12 @@ const NavBar = () => {
         <NavLink to="/hourly">Hourly</NavLink>
         <NavLink to="/10day">10 Day Forecast</NavLink>
       </nav>
-      {coordsToUse === zipOrNav.Nav ? (
+      {selectedLocation === zipOrNav.Nav ? (
         <button onClick={() => setShowLocationModal(true)}>
           Get Location from Zip
         </button>
       ) : (
-        <button onClick={() => setCoordsToUse(zipOrNav.Nav)}>
+        <button onClick={() => dispatch(setSelectedLocation(zipOrNav.Nav))}>
           Use Device Location
         </button>
       )}
@@ -74,7 +79,7 @@ const NavBar = () => {
       {showLocationModal && (
         <LocationModal
           closeModal={() => setShowLocationModal(false)}
-          setUseZipCoords={() => setCoordsToUse(zipOrNav.Zip)}
+          setUseZipCoords={() => dispatch(setSelectedLocation(zipOrNav.Zip))}
         />
       )}
     </header>
