@@ -1,18 +1,24 @@
 import React, { FC, FormEvent, useState } from "react";
 import { createPortal } from "react-dom";
+// utils
 import api from "../../api";
+import { useAppDispatch } from "../../store/hooks";
+import { setZipCoords } from "../../store/locationReducer";
 
 interface Iprops {
   closeModal: () => void;
+  setUseZipCoords: () => void;
 }
 
-const LocationModal: FC<Iprops> = ({ closeModal }) => {
+const LocationModal: FC<Iprops> = ({ closeModal, setUseZipCoords }) => {
   // get portal for modal render
   const portal = document.getElementById("portal");
 
   const initialFormState = { zipcode: "" };
   const [formState, setFormState] = useState(initialFormState);
   const { zipcode } = formState;
+
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     const { id, value } = event.currentTarget;
@@ -23,7 +29,8 @@ const LocationModal: FC<Iprops> = ({ closeModal }) => {
     event.preventDefault();
     api.geoapify
       .getCoordsFromZip(zipcode)
-      .then((result) => console.log(result));
+      .then((result) => result && dispatch(setZipCoords(result)));
+    setUseZipCoords();
     closeModal();
   };
 

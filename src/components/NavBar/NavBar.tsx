@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
 // utils
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setNavCoords, zipOrNav } from "../../store/locationReducer";
 import api from "../../api";
 import Icoords from "../../interfaces/coords";
 // components
 import LocationModal from "../LocationModal/LocationModal";
 // styles
 import "./NavBar.scss";
-import { setNavCoords } from "../../store/locationReducer";
 
 const NavBar = () => {
   // redux store dispatch and coords access
   const dispatch = useAppDispatch();
-  const { navCoords } = useAppSelector((state) => state.location);
+  const { navCoords, zipCoords } = useAppSelector((state) => state.location);
 
   // local state
   const [showLocationModal, setShowLocationModal] = useState(false);
-  const [location, setLocation] = useState<Icoords | null>(null);
   const [locationString, setLocationString] = useState<string | null>(null);
+  const [coordsToUse, setCoordsToUse] = useState(zipOrNav.Nav);
 
   const getCoordsFromNavigator = () => {
     navigator.geolocation.getCurrentPosition((response) => {
@@ -30,27 +30,26 @@ const NavBar = () => {
           longitude: longitude.toString(),
         })
       );
-
-      setLocation({
-        latitude: latitude.toString(),
-        longitude: longitude.toString(),
-      });
     });
   };
 
-  useEffect(() => {
-    if (!location) getCoordsFromNavigator();
+  const getCity = (location: Icoords) => {
+    console.log("getCity ", location)
+    api.geoapify
+      .getCity(location.latitude, location.longitude)
+      .then((city) => city && setLocationString(city))
+      .catch((error) => console.log(error));
+  };
 
-    if (location) {
-      const getCity = () => {
-        api.geoapify
-          .getCity(location.latitude, location.longitude)
-          .then((city) => city && setLocationString(city))
-          .catch((error) => console.log(error));
-      };
-      getCity();
-    }
-  }, [location]);
+  useEffect(() => {
+    if (!navCoords) getCoordsFromNavigator();
+
+    if (navCoords && coordsToUse === zipOrNav.Nav) getCity(navCoords);
+
+    if (zipCoords && coordsToUse === zipOrNav.Zip) getCity(zipCoords);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navCoords, zipCoords, coordsToUse]);
 
   return (
     <header>
@@ -60,14 +59,23 @@ const NavBar = () => {
         <NavLink to="/hourly">Hourly</NavLink>
         <NavLink to="/10day">10 Day Forecast</NavLink>
       </nav>
-      <button onClick={() => setShowLocationModal(true)}>
-        change location
-      </button>
+      {coordsToUse === zipOrNav.Nav ? (
+        <button onClick={() => setShowLocationModal(true)}>
+          Get Location from Zip
+        </button>
+      ) : (
+        <button onClick={() => setCoordsToUse(zipOrNav.Nav)}>
+          Use Device Location
+        </button>
+      )}
       <p className="location">
         {locationString ? locationString : "Loading..."}
       </p>
       {showLocationModal && (
-        <LocationModal closeModal={() => setShowLocationModal(false)} />
+        <LocationModal
+          closeModal={() => setShowLocationModal(false)}
+          setUseZipCoords={() => setCoordsToUse(zipOrNav.Zip)}
+        />
       )}
     </header>
   );

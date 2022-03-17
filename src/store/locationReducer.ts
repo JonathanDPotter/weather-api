@@ -4,7 +4,7 @@ import { loadState } from "./localStorage";
 // interfaces
 import Icoords from "../interfaces/coords";
 
-enum zipOrNav {
+export enum zipOrNav {
   Zip = "ZIP",
   Nav = "NAV",
 }
@@ -24,8 +24,8 @@ const initialState = persistedState.auth
       selectedLocation: zipOrNav.Nav,
     } as IlocationSliceState)
   : ({
-      navCoords: { latitude: "", longitude: "" },
-      zipCoords: { latitude: "", longitude: "" },
+      navCoords: null,
+      zipCoords: null,
       selectedLocation: zipOrNav.Nav,
     } as IlocationSliceState);
 
