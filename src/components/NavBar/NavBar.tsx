@@ -8,55 +8,49 @@ import Icoords from "../../interfaces/coords";
 import LocationModal from "../LocationModal/LocationModal";
 // styles
 import "./NavBar.scss";
+import { setNavCoords } from "../../store/locationReducer";
 
 const NavBar = () => {
+  // redux store dispatch and coords access
   const dispatch = useAppDispatch();
+  const { navCoords } = useAppSelector((state) => state.location);
 
-  // get coordinates from redux state
-  const { coords } = useAppSelector((state) => state.location);
   // local state
-  const [city, setCity] = useState("");
-  const [location, setLocation] = useState<Icoords | null>(null);
-  const [autolocate, setAutolocate] = useState(true);
   const [showLocationModal, setShowLocationModal] = useState(false);
+  const [location, setLocation] = useState<Icoords | null>(null);
+  const [locationString, setLocationString] = useState<string | null>(null);
 
-  const changeLocation = () => {
-    setShowLocationModal(true);
+  const getCoordsFromNavigator = () => {
+    navigator.geolocation.getCurrentPosition((response) => {
+      const { latitude, longitude } = response.coords;
+
+      dispatch(
+        setNavCoords({
+          latitude: latitude.toString(),
+          longitude: longitude.toString(),
+        })
+      );
+
+      setLocation({
+        latitude: latitude.toString(),
+        longitude: longitude.toString(),
+      });
+    });
   };
 
-  const closeModal = () => setShowLocationModal(false);
-
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      const success = (position: any) => {
-        const { latitude, longitude } = position.coords;
-        setLocation({ latitude, longitude });
-      };
-
-      navigator.geolocation.getCurrentPosition(success, (error) =>
-        console.log(error)
-      );
-    }
-
-    if (coords) {
-      setLocation(coords);
-    }
+    if (!location) getCoordsFromNavigator();
 
     if (location) {
-      const getCity = async () => {
-        return await api.geoapify.getCity(
-          location.latitude,
-          location.longitude
-        );
+      const getCity = () => {
+        api.geoapify
+          .getCity(location.latitude, location.longitude)
+          .then((city) => city && setLocationString(city))
+          .catch((error) => console.log(error));
       };
-
-      getCity()
-        .then((result) => {
-          if (result) setCity(result);
-        })
-        .catch((error) => console.log(error));
+      getCity();
     }
-  }, [coords, location]);
+  }, [location]);
 
   return (
     <header>
@@ -66,13 +60,15 @@ const NavBar = () => {
         <NavLink to="/hourly">Hourly</NavLink>
         <NavLink to="/10day">10 Day Forecast</NavLink>
       </nav>
-      <button onClick={changeLocation}>change location</button>
-      {city ? (
-        <p className="location">{city}</p>
-      ) : (
-        <p className="location">Loading...</p>
+      <button onClick={() => setShowLocationModal(true)}>
+        change location
+      </button>
+      <p className="location">
+        {locationString ? locationString : "Loading..."}
+      </p>
+      {showLocationModal && (
+        <LocationModal closeModal={() => setShowLocationModal(false)} />
       )}
-      {showLocationModal && <LocationModal closeModal={closeModal}/>}
     </header>
   );
 };

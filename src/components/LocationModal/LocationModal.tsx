@@ -1,5 +1,6 @@
 import React, { FC, FormEvent, useState } from "react";
 import { createPortal } from "react-dom";
+import api from "../../api";
 
 interface Iprops {
   closeModal: () => void;
@@ -20,7 +21,9 @@ const LocationModal: FC<Iprops> = ({ closeModal }) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(zipcode);
+    api.geoapify
+      .getCoordsFromZip(zipcode)
+      .then((result) => console.log(result));
     closeModal();
   };
 

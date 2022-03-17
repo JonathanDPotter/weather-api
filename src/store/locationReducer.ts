@@ -4,28 +4,49 @@ import { loadState } from "./localStorage";
 // interfaces
 import Icoords from "../interfaces/coords";
 
+enum zipOrNav {
+  Zip = "ZIP",
+  Nav = "NAV",
+}
+
 interface IlocationSliceState {
-  coords: { latitude: string; longitude: string };
+  navCoords: Icoords | null;
+  zipCoords: Icoords | null;
+  selectedLocation: zipOrNav;
 }
 
 const persistedState = loadState();
 
 const initialState = persistedState.auth
   ? ({
-      coords: persistedState.coords,
+      navCoords: persistedState.navCoords,
+      zipCoords: persistedState.zipCoords,
+      selectedLocation: zipOrNav.Nav,
     } as IlocationSliceState)
-  : ({ coords: { latitude: "", longitude: "" } } as IlocationSliceState);
+  : ({
+      navCoords: { latitude: "", longitude: "" },
+      zipCoords: { latitude: "", longitude: "" },
+      selectedLocation: zipOrNav.Nav,
+    } as IlocationSliceState);
 
 const locationSlice = createSlice({
-  name: "coords",
+  name: "locationSlice",
   initialState,
   reducers: {
-    setCoords: (state, action: PayloadAction<Icoords>) => {
-      state.coords = action.payload;
+    setNavCoords: (state, action: PayloadAction<Icoords>) => {
+      state.navCoords = action.payload;
+    },
+    setZipCoords: (state, action: PayloadAction<Icoords>) => {
+      state.zipCoords = action.payload;
+    },
+    setSelectedLocation: (state, action: PayloadAction<string>) => {
+      if (action.payload === "ZIP") state.selectedLocation = zipOrNav.Zip;
+      if (action.payload === "NAV") state.selectedLocation = zipOrNav.Nav;
     },
   },
 });
 
-export const { setCoords } = locationSlice.actions;
+export const { setNavCoords, setZipCoords, setSelectedLocation } =
+  locationSlice.actions;
 
 export default locationSlice.reducer;

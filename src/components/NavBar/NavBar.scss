@@ -1,7 +1,8 @@
 @use "../../theme";
 
 header {
-  height: 20vh;
+  height: fit-content;
+  min-height: 20vh;
   width: 100vw;
   display: grid;
   background-color: theme.$blue;
