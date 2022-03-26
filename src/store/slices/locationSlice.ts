@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // utils
-import { loadState } from "./localStorage";
+import { loadState } from "../localStorage";
 // interfaces
-import Icoords from "../interfaces/coords";
+import Icoords from "../../interfaces/coords";
 
 export enum zipOrNav {
   Zip = "ZIP",

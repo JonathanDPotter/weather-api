@@ -1,15 +1,12 @@
 import axios from "axios";
-import Icoords from "../interfaces/coords";
+import { InewUser } from "../interfaces/user";
 
-const geoApiKey = process.env.REACT_APP_GEOAPIFY_API_KEY;
+const baseUrl = `http://localhost:1337/`;
 
 const getCity = async (lat: string, lon: string) => {
   try {
-    const result = await axios.get(
-      `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=${geoApiKey}`
-    );
-    const { city, county, state, country } = result.data.features[0].properties;
-    return `${city ? city : county} ${state}, ${country}`;
+    const result = await axios.get(`${baseUrl}api/geoapify/city/${lat}/${lon}`);
+    return result.data;
   } catch (error: any) {
     console.log(error.message);
   }
@@ -17,22 +14,27 @@ const getCity = async (lat: string, lon: string) => {
 
 const getCoordsFromZip = async (zip: string) => {
   try {
-    const result: any = await axios.get(
-      `https://api.geoapify.com/v1/geocode/search?text=${zip}&lang=en&limit=10&type=postcode&filter=us&format=json&apiKey=${geoApiKey}`
-    );
-    const { lat, lon } = result.data.results[0];
-    const coordsToReturn: Icoords = {
-      latitude: lat.toString(),
-      longitude: lon.toString(),
-    };
-    return coordsToReturn;
+    const result: any = await axios.get(`${baseUrl}api/geoapify/coords/${zip}`);
+    return result.data;
   } catch (error: any) {
     console.log(error);
   }
 };
 
+const register = async (user: InewUser) => {
+  const response = await axios.post(`${baseUrl}api/user/register`, user);
+  return response;
+};
+
+const login = async (user: InewUser) => {
+  const response = await axios.post(`${baseUrl}api/user/login`, user);
+  return response;
+};
+
 const geoapify = { getCity, getCoordsFromZip };
 
-const api = { geoapify };
+const auth = { register, login };
+
+const api = { geoapify, auth };
 
 export default api;

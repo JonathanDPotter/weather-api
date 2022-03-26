@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // utils
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   setNavCoords,
   setSelectedLocation,
   zipOrNav,
-} from "../../store/locationReducer";
+} from "../../store/slices/locationSlice";
 import api from "../../api";
 import Icoords from "../../interfaces/coords";
 // components
 import LocationModal from "../LocationModal/LocationModal";
 // styles
 import "./NavBar.scss";
+import { logOut } from "../../store/slices/authSlice";
 
 const NavBar = () => {
   // redux store dispatch and coords access
@@ -20,6 +21,12 @@ const NavBar = () => {
   const { navCoords, zipCoords, selectedLocation } = useAppSelector(
     (state) => state.location
   );
+
+  // get user from redux
+  const { user } = useAppSelector((store) => store.auth);
+
+  // navigation hook from react-router
+  const navigate = useNavigate();
 
   // local state
   const [showLocationModal, setShowLocationModal] = useState(false);
@@ -39,11 +46,19 @@ const NavBar = () => {
   };
 
   const getCity = (location: Icoords) => {
-    console.log("getCity ", location);
     api.geoapify
       .getCity(location.latitude, location.longitude)
       .then((city) => city && setLocationString(city))
       .catch((error) => console.log(error));
+  };
+
+  const logout = () => {
+    dispatch(logOut());
+    navigate("/");
+  };
+
+  const login = () => {
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -82,6 +97,9 @@ const NavBar = () => {
           setUseZipCoords={() => dispatch(setSelectedLocation(zipOrNav.Zip))}
         />
       )}
+      <button onClick={user ? logout : login}>
+        {user ? "Log Out" : "Log In"}
+      </button>
     </header>
   );
 };

@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 // utils
 import api from "../../api";
 import { useAppDispatch } from "../../store/hooks";
-import { setZipCoords } from "../../store/locationReducer";
+import { setZipCoords } from "../../store/slices/locationSlice";
 
 interface Iprops {
   closeModal: () => void;

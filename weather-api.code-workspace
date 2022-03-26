@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "../../.."
+    },
+    {
+      "path": "../../../../../express-apps/weather-api-back"
+    }
+  ],
+  "settings": {
+    "cSpell.words": ["GEOAPIFY", "Icoords", "METEOMATICS"]
+  }
+}
