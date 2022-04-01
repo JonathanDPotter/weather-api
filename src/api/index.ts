@@ -1,4 +1,5 @@
 import axios from "axios";
+import Icoords from "../interfaces/coords";
 import { InewUser } from "../interfaces/user";
 
 const baseUrl = `http://localhost:1337/`;
@@ -31,10 +32,25 @@ const login = async (user: InewUser) => {
   return response;
 };
 
+const getCurrent = async (coords: Icoords) => {
+  const { latitude, longitude } = coords;
+  console.log(latitude, longitude)
+  try {
+    const response = await axios.get(
+      `${baseUrl}api/weather/current/${latitude}/${longitude}`
+    );
+    return response;
+  } catch (error: any) {
+    window.alert(error.message);
+  }
+};
+
 const geoapify = { getCity, getCoordsFromZip };
 
 const auth = { register, login };
 
-const api = { geoapify, auth };
+const weather = { getCurrent };
+
+const api = { geoapify, auth, weather };
 
 export default api;
