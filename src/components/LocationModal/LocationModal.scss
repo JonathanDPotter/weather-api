@@ -1,0 +1,23 @@
+@use "../../theme";
+
+.location-fore {
+  background-color: theme.$main;
+  color: theme.$compTwo;
+  height: 40vh;
+  width: 40vw;
+  border: 1rem solid theme.$compTwo;
+  border-radius: 1rem;
+  @include theme.flex-column-center-center;
+
+  form {
+    width: 90%;
+    height: 70%;
+    @include theme.flex-column-center-space-evenly;
+
+    label {
+      color: theme.$compOne;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+  }
+}

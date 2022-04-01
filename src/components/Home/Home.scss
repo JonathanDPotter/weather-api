@@ -1,0 +1,12 @@
+@use "../../theme";
+
+.home {
+  position: relative;
+  @include theme.flex-column-center-center;
+
+  h1 {
+    position: absolute;
+    top: 1rem;
+    color: theme.$compTwo;
+  }
+}

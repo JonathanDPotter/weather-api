@@ -80,12 +80,13 @@ const NavBar = () => {
         <NavLink to="/10day">10 Day Forecast</NavLink>
       </nav>
       {selectedLocation === zipOrNav.Nav ? (
-        <button onClick={() => setShowLocationModal(true)}>
-          Get Location from Zip
+        <button onClick={() => setShowLocationModal(true)}
+        className="zip-nav">
+          Enter Zip
         </button>
       ) : (
-        <button onClick={() => dispatch(setSelectedLocation(zipOrNav.Nav))}>
-          Use Device Location
+          <button onClick={() => dispatch(setSelectedLocation(zipOrNav.Nav))}className="zip-nav">
+          Use Location
         </button>
       )}
       <p className="location">
@@ -97,7 +98,7 @@ const NavBar = () => {
           setUseZipCoords={() => dispatch(setSelectedLocation(zipOrNav.Zip))}
         />
       )}
-      <button onClick={user ? logout : login}>
+      <button onClick={user ? logout : login} className="login-logout">
         {user ? "Log Out" : "Log In"}
       </button>
     </header>

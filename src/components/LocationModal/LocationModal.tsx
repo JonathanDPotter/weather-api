@@ -4,6 +4,8 @@ import { createPortal } from "react-dom";
 import api from "../../api";
 import { useAppDispatch } from "../../store/hooks";
 import { setZipCoords } from "../../store/slices/locationSlice";
+// styles
+import "./LocationModal.scss";
 
 interface Iprops {
   closeModal: () => void;
@@ -37,19 +39,17 @@ const LocationModal: FC<Iprops> = ({ closeModal, setUseZipCoords }) => {
   if (portal) {
     return createPortal(
       <div className="modal-back">
-        <div className="modal-fore">
+        <div className="location-fore">
           <form action="submit" onSubmit={handleSubmit}>
-            <div className="label-input">
-              <label htmlFor="zipcode">Zip Code</label>
-              <input
-                type="text"
-                name="zipcode"
-                id="zipcode"
-                onChange={handleChange}
-                value={zipcode}
-              />
-              <input type="submit" value="Go!" />
-            </div>
+            <label htmlFor="zipcode">Zip Code</label>
+            <input
+              type="text"
+              name="zipcode"
+              id="zipcode"
+              onChange={handleChange}
+              value={zipcode}
+            />
+            <input type="submit" className="btn" value="Go!" />
           </form>
           <button onClick={closeModal}>Cancel</button>
         </div>

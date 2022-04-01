@@ -1,2 +1,19 @@
-$blue: #2340ad;
-$yellow: #ad9023;
+$main: #F487B6;
+$compOne: #9046CF;
+$compOneShadow: #351551;
+$modalBack: rgba(53, 21, 81, .5);
+$compTwo: #FDE12D;
+
+@mixin flex-column-center-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column-center-space-evenly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}

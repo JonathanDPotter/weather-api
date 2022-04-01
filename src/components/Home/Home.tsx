@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+// components
+import WeatherInfo from "../WeatherInfo/WeatherInfo";
 // utils
 import { useAppSelector } from "../../store/hooks";
 import { zipOrNav } from "../../store/slices/locationSlice";
@@ -7,6 +9,7 @@ import Icoords from "../../interfaces/coords";
 // styles
 import "./Home.scss";
 import api from "../../api";
+import Iweather from "../../interfaces/weather";
 
 const Home = () => {
   // get location data from redux
@@ -16,7 +19,7 @@ const Home = () => {
 
   // local state
   const [coords, setCoords] = useState<Icoords | null>(null);
-  const [weather, setWeather] = useState<any | null>(null);
+  const [weather, setWeather] = useState<Iweather | null>(null);
 
   useEffect(() => {
     if (coords) {
@@ -36,7 +39,7 @@ const Home = () => {
   return (
     <div className="home page">
       <h1>Welcome to Weather Imp</h1>
-      {weather && <p>{weather.current.temp_f}</p>}
+      {weather && <WeatherInfo title="Current" weather={weather} />}
     </div>
   );
 };
