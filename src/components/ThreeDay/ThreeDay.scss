@@ -1,0 +1,5 @@
+@use "../../theme";
+
+.three-day {
+  @include theme.flex-column-center-center;
+}

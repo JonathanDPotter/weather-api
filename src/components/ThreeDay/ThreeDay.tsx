@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-// components
-import WeatherInfo from "../WeatherInfo/WeatherInfo";
+import api from "../../api";
 // utils
 import { useAppSelector } from "../../store/hooks";
 import { zipOrNav } from "../../store/slices/locationSlice";
 // interfaces
 import Icoords from "../../interfaces/coords";
+// components
+import WeatherInfo from "../WeatherInfo/WeatherInfo";
 // styles
-import "./Home.scss";
-import api from "../../api";
-import Icurrent from "../../interfaces/current";
+import "./ThreeDay.scss";
+import Iforecast from "../../interfaces/forecast";
 
-const Home = () => {
+const ThreeDay = () => {
   // get location data from redux
   const { navCoords, zipCoords, selectedLocation } = useAppSelector(
     (state) => state.location
@@ -19,12 +19,16 @@ const Home = () => {
 
   // local state
   const [coords, setCoords] = useState<Icoords | null>(null);
-  const [weather, setWeather] = useState<Icurrent | null>(null);
+  const [weather, setWeather] = useState<Iforecast | null>(null);
+
+  useEffect(() => {
+    weather && console.log(weather);
+  }, [weather]);
 
   useEffect(() => {
     if (coords) {
       const getWeather = async () => {
-        return await api.weather.getCurrent(coords);
+        return await api.weather.getThreeDay(coords);
       };
 
       getWeather().then((response) => response && setWeather(response.data));
@@ -35,13 +39,13 @@ const Home = () => {
     if (navCoords && selectedLocation === zipOrNav.Nav) setCoords(navCoords);
     if (zipCoords && selectedLocation === zipOrNav.Zip) setCoords(zipCoords);
   }, [navCoords, zipCoords, selectedLocation]);
-
-  return (
-    <div className="home page">
-      <h1>Welcome to Weather Imp</h1>
-      {weather && <WeatherInfo title="Current" weather={weather} />}
+  return weather ? (
+    <div className="three-day page">
+      <WeatherInfo title="Current" weather={weather} />
     </div>
+  ) : (
+    <></>
   );
 };
 
-export default Home;
+export default ThreeDay;

@@ -34,10 +34,23 @@ const login = async (user: InewUser) => {
 
 const getCurrent = async (coords: Icoords) => {
   const { latitude, longitude } = coords;
-  console.log(latitude, longitude)
+  console.log(latitude, longitude);
   try {
     const response = await axios.get(
       `${baseUrl}api/weather/current/${latitude}/${longitude}`
+    );
+    return response;
+  } catch (error: any) {
+    window.alert(error.message);
+  }
+};
+
+const getThreeDay = async (coords: Icoords) => {
+  const { latitude, longitude } = coords;
+  console.log(latitude, longitude);
+  try {
+    const response = await axios.get(
+      `${baseUrl}api/weather/three-day/${latitude}/${longitude}`
     );
     return response;
   } catch (error: any) {
@@ -49,7 +62,7 @@ const geoapify = { getCity, getCoordsFromZip };
 
 const auth = { register, login };
 
-const weather = { getCurrent };
+const weather = { getCurrent, getThreeDay };
 
 const api = { geoapify, auth, weather };
 

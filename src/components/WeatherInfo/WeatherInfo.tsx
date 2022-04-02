@@ -1,14 +1,15 @@
-import React, { FC } from 'react'
-import Iweather from '../../interfaces/weather';
-// styles 
+import React, { FC } from "react";
+import Icurrent from "../../interfaces/current";
+import Iforecast from "../../interfaces/forecast";
+// styles
 import "./WeatherInfo.scss";
 
 interface Iprops {
-  weather: Iweather;
+  weather: Icurrent | Iforecast;
   title: string;
 }
 
-const WeatherInfo: FC<Iprops> = ({title, weather}) => {
+const WeatherInfo: FC<Iprops> = ({ title, weather }) => {
   return (
     <div className="weather-info">
       <p className="title">{title}</p>
@@ -20,6 +21,6 @@ const WeatherInfo: FC<Iprops> = ({title, weather}) => {
       />
     </div>
   );
-}
+};
 
-export default WeatherInfo
+export default WeatherInfo;

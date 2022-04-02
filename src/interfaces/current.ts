@@ -1,4 +1,4 @@
-export default interface Iweather {
+export default interface Icurrent {
   location: {
     name: string;
     region: string;

@@ -77,7 +77,7 @@ const NavBar = () => {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/hourly">Hourly</NavLink>
-        <NavLink to="/10day">10 Day Forecast</NavLink>
+        <NavLink to="/10day">3 Day Forecast</NavLink>
       </nav>
       {selectedLocation === zipOrNav.Nav ? (
         <button onClick={() => setShowLocationModal(true)}
