@@ -1,16 +1,7 @@
 @use "../../theme";
 
 .weather-info {
-  height: 40vh;
-  width: 40vw;
-  max-width: 40vh;
-  border: 1rem solid theme.$main;
-  border-radius: 1rem;
-  padding: 1rem;
-  @include theme.flex-column-center-space-evenly;
-  background-color: theme.$compTwo;
-  box-shadow: 5px 5px 5px theme.$compOneShadow;
-  color: theme.$compOne;
+@include theme.weather-info-box;
 
   .title {
     font-size: 1.5rem;

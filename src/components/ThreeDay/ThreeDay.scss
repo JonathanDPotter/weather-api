@@ -1,5 +1,6 @@
 @use "../../theme";
 
 .three-day {
-  @include theme.flex-column-center-center;
+  @include theme.flex-column-center-space-evenly;
+  height: 200vh;
 }

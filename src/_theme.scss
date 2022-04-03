@@ -17,3 +17,16 @@ $compTwo: #FDE12D;
   align-items: center;
   justify-content: space-evenly;
 }
+
+@mixin weather-info-box {
+    height: 40vh;
+  width: 40vw;
+  max-width: 40vh;
+  border: 1rem solid $main;
+  border-radius: 1rem;
+  padding: 1rem;
+  @include flex-column-center-space-evenly;
+  background-color: $compTwo;
+  box-shadow: 5px 5px 5px $compOneShadow;
+  color: $compOne;
+}

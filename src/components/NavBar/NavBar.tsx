@@ -73,11 +73,11 @@ const NavBar = () => {
 
   return (
     <header>
-      <p className="title">Weather Imp</p>
+      <h1 className="title">Weather Imp</h1>
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/hourly">Hourly</NavLink>
-        <NavLink to="/10day">3 Day Forecast</NavLink>
+        <NavLink to="/threeday">3 Day Forecast</NavLink>
       </nav>
       {selectedLocation === zipOrNav.Nav ? (
         <button onClick={() => setShowLocationModal(true)}

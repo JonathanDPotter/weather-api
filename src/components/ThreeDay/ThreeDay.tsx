@@ -7,6 +7,7 @@ import { zipOrNav } from "../../store/slices/locationSlice";
 import Icoords from "../../interfaces/coords";
 // components
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
+import Forecast from "../Forecast/Forecast";
 // styles
 import "./ThreeDay.scss";
 import Iforecast from "../../interfaces/forecast";
@@ -20,10 +21,6 @@ const ThreeDay = () => {
   // local state
   const [coords, setCoords] = useState<Icoords | null>(null);
   const [weather, setWeather] = useState<Iforecast | null>(null);
-
-  useEffect(() => {
-    weather && console.log(weather);
-  }, [weather]);
 
   useEffect(() => {
     if (coords) {
@@ -41,7 +38,12 @@ const ThreeDay = () => {
   }, [navCoords, zipCoords, selectedLocation]);
   return weather ? (
     <div className="three-day page">
+      <h2>Three Day Forecast</h2>
       <WeatherInfo title="Current" weather={weather} />
+      {weather.forecast.forecastday.map((day, i) => <Forecast
+          forecast={weather.forecast.forecastday[i]}
+          key={`forecastDay${i}`}
+        />)}
     </div>
   ) : (
     <></>

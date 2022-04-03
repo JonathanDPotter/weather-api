@@ -1,0 +1,12 @@
+@use "../../theme";
+
+.forecast {
+  @include theme.weather-info-box;
+
+  .temps {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+}
