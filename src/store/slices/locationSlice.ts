@@ -17,7 +17,7 @@ interface IlocationSliceState {
 
 const persistedState = loadState();
 
-const initialState = persistedState.auth
+const initialState = persistedState
   ? ({
       navCoords: persistedState.navCoords,
       zipCoords: persistedState.zipCoords,

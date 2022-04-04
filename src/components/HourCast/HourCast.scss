@@ -1,0 +1,23 @@
+@use "../../theme";
+
+.hour-cast {
+  @include theme.weather-info-box;
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .temperature {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  .description {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  img {
+    height: 15vh;
+  }
+}

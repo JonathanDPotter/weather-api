@@ -1,0 +1,6 @@
+@use "../../theme";
+
+.hourly {
+  @include theme.flex-column-center-space-evenly;
+  height: calc(24 * 50vh);
+}

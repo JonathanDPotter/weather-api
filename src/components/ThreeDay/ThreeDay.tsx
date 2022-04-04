@@ -38,7 +38,7 @@ const ThreeDay = () => {
   }, [navCoords, zipCoords, selectedLocation]);
   return weather ? (
     <div className="three-day page">
-      <h2>Three Day Forecast</h2>
+      <h2 className="page-title">Three Day Forecast</h2>
       <WeatherInfo title="Current" weather={weather} />
       {weather.forecast.forecastday.map((day, i) => <Forecast
           forecast={weather.forecast.forecastday[i]}

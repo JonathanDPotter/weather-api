@@ -38,7 +38,7 @@ const Home = () => {
 
   return (
     <div className="home page">
-      <h1>Welcome to Weather Imp</h1>
+      <h2 className="page-title">Welcome to Weather Imp</h2>
       {weather && <WeatherInfo title="Current" weather={weather} />}
     </div>
   );
