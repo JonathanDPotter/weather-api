@@ -9,11 +9,13 @@ import {
 } from "../../store/slices/locationSlice";
 import api from "../../api";
 import Icoords from "../../interfaces/coords";
+import { logOut } from "../../store/slices/authSlice";
 // components
 import LocationModal from "../LocationModal/LocationModal";
+// images
+import { ReactComponent as ImpLogo } from "../../images/impLogo.svg";
 // styles
 import "./NavBar.scss";
-import { logOut } from "../../store/slices/authSlice";
 
 const NavBar = () => {
   // redux store dispatch and coords access
@@ -73,19 +75,22 @@ const NavBar = () => {
 
   return (
     <header>
-      <h1 className="title">Weather Imp</h1>
+      <h1 className="title">{<ImpLogo height="2rem" />} Weather Imp</h1>
+
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/hourly">Hourly</NavLink>
         <NavLink to="/threeday">3 Day Forecast</NavLink>
       </nav>
       {selectedLocation === zipOrNav.Nav ? (
-        <button onClick={() => setShowLocationModal(true)}
-        className="zip-nav">
+        <button onClick={() => setShowLocationModal(true)} className="zip-nav">
           Enter Zip
         </button>
       ) : (
-          <button onClick={() => dispatch(setSelectedLocation(zipOrNav.Nav))}className="zip-nav">
+        <button
+          onClick={() => dispatch(setSelectedLocation(zipOrNav.Nav))}
+          className="zip-nav"
+        >
           Use Location
         </button>
       )}

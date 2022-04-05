@@ -1,6 +1,7 @@
 @use "../../theme";
 
 header {
+  position: relative;
   height: fit-content;
   min-height: 20vh;
   width: 100vw;
@@ -11,13 +12,16 @@ header {
     "nav nav nav "
     "button1 ... button2";
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   font-size: 1.2rem;
   font-weight: 700;
   color: theme.$compOne;
+  line-height: 2rem;
+  align-items: end;
+  justify-items: center;
 
   .title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     grid-area: title;
   }
 
@@ -51,7 +55,8 @@ header {
   grid-area: button2;
 }
 
-button, input {
+button,
+input {
   height: 2rem;
   width: 75%;
   max-width: 10rem;

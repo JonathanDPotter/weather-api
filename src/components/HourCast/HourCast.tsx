@@ -15,10 +15,12 @@ const HourCast: FC<Iprops> = ({ weather }) => {
           month: "short",
           weekday: "long",
           day: "numeric",
-        })} ${new Date(weather.time).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}`}
+        })} ${new Date(weather.time)
+          .toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+          .replace(/^\b0/g, "")}`}
       </p>
       <p className="temperature">{weather.temp_f}&deg;</p>
       <p className="description">{weather.condition.text}</p>
