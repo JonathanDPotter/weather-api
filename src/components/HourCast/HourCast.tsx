@@ -13,7 +13,7 @@ const HourCast: FC<Iprops> = ({ weather }) => {
       <p className="title">
         {`${new Date(weather.time).toLocaleDateString([], {
           month: "short",
-          weekday: "long",
+          weekday: "short",
           day: "numeric",
         })} ${new Date(weather.time)
           .toLocaleTimeString([], {
@@ -30,6 +30,9 @@ const HourCast: FC<Iprops> = ({ weather }) => {
       {weather.chance_of_snow > 0 && (
         <p>Chance of Precipitation {weather.chance_of_snow}%</p>
       )}
+      <p>
+        Wind {weather.wind_dir} {weather.wind_mph}mph
+      </p>
       <img src={weather.condition.icon} alt={weather.condition.text} />
     </div>
   );

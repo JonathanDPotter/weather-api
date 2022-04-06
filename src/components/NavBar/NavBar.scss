@@ -10,7 +10,7 @@ header {
   grid-template-areas:
     "title location location"
     "nav nav nav "
-    "button1 ... button2";
+    "button ... ...";
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   font-size: 1.2rem;
@@ -48,11 +48,7 @@ header {
   }
 }
 .zip-nav {
-  grid-area: button1;
-}
-
-.login-logout {
-  grid-area: button2;
+  grid-area: button;
 }
 
 button,

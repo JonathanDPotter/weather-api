@@ -9,7 +9,6 @@ import {
 } from "../../store/slices/locationSlice";
 import api from "../../api";
 import Icoords from "../../interfaces/coords";
-import { logOut } from "../../store/slices/authSlice";
 // components
 import LocationModal from "../LocationModal/LocationModal";
 // images
@@ -23,9 +22,6 @@ const NavBar = () => {
   const { navCoords, zipCoords, selectedLocation } = useAppSelector(
     (state) => state.location
   );
-
-  // get user from redux
-  const { user } = useAppSelector((store) => store.auth);
 
   // navigation hook from react-router
   const navigate = useNavigate();
@@ -52,15 +48,6 @@ const NavBar = () => {
       .getCity(location.latitude, location.longitude)
       .then((city) => city && setLocationString(city))
       .catch((error) => console.log(error));
-  };
-
-  const logout = () => {
-    dispatch(logOut());
-    navigate("/");
-  };
-
-  const login = () => {
-    navigate("/login");
   };
 
   useEffect(() => {
@@ -103,9 +90,6 @@ const NavBar = () => {
           setUseZipCoords={() => dispatch(setSelectedLocation(zipOrNav.Zip))}
         />
       )}
-      <button onClick={user ? logout : login} className="login-logout">
-        {user ? "Log Out" : "Log In"}
-      </button>
     </header>
   );
 };

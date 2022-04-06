@@ -10,6 +10,7 @@ import Icoords from "../../interfaces/coords";
 import "./Home.scss";
 import api from "../../api";
 import Icurrent from "../../interfaces/current";
+import Loading from "../Loading/Loading";
 
 const Home = () => {
   // get location data from redux
@@ -36,10 +37,14 @@ const Home = () => {
     if (zipCoords && selectedLocation === zipOrNav.Zip) setCoords(zipCoords);
   }, [navCoords, zipCoords, selectedLocation]);
 
-  return (
+  return weather ? (
     <div className="home page">
       <h2 className="page-title">Welcome to Weather Imp</h2>
-      {weather && <WeatherInfo title="Current" weather={weather} />}
+      <WeatherInfo title="Current" weather={weather} />
+    </div>
+  ) : (
+    <div className="page">
+      <Loading />
     </div>
   );
 };

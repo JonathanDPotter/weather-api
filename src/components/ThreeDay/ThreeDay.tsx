@@ -11,6 +11,7 @@ import Forecast from "../Forecast/Forecast";
 // styles
 import "./ThreeDay.scss";
 import Iforecast from "../../interfaces/forecast";
+import Loading from "../Loading/Loading";
 
 const ThreeDay = () => {
   // get location data from redux
@@ -39,14 +40,17 @@ const ThreeDay = () => {
   return weather ? (
     <div className="three-day page">
       <h2 className="page-title">Three Day Forecast</h2>
-      <WeatherInfo title="Current" weather={weather} />
-      {weather.forecast.forecastday.map((day, i) => <Forecast
+      {weather.forecast.forecastday.map((day, i) => (
+        <Forecast
           forecast={weather.forecast.forecastday[i]}
           key={`forecastDay${i}`}
-        />)}
+        />
+      ))}
     </div>
   ) : (
-    <></>
+    <div className="page">
+      <Loading />
+    </div>
   );
 };
 

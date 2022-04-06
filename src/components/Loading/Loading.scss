@@ -1,0 +1,28 @@
+@use "../../theme";
+
+.loading {
+  height: 100vh;
+  @include theme.flex-column-center-center;
+
+  h3 {
+    font-size: 3rem;
+    width: 10rem;
+    color: theme.$main;
+    &:after {
+      animation: ellipsis 1s infinite;
+      content: "";
+    }
+
+    @keyframes ellipsis {
+      25% {
+        content: ".";
+      }
+      50% {
+        content: "..";
+      }
+      75% {
+        content: "...";
+      }
+    }
+  }
+}

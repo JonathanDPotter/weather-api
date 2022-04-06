@@ -3,10 +3,27 @@
 .forecast {
   @include theme.weather-info-box;
 
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
   .temps {
-    width: 70%;
+    width: 50%;
     margin: auto;
     display: flex;
     justify-content: space-between;
+  }
+
+  .precip-wind {
+    display: grid;
+    width: 80%;
+    margin: auto;
+    grid-template-columns: 3fr 1fr;
+    justify-items: start;
+  }
+
+  img {
+    height: 10rem;
   }
 }

@@ -1,8 +1,8 @@
-$main: #F487B6;
-$compOne: #9046CF;
+$main: #f487b6;
+$compOne: #9046cf;
 $compOneShadow: #351551;
-$modalBack: rgba(53, 21, 81, .5);
-$compTwo: #FDE12D;
+$modalBack: rgba(53, 21, 81, 0.5);
+$compTwo: #fde12d;
 
 @mixin flex-column-center-center {
   display: flex;
@@ -19,7 +19,7 @@ $compTwo: #FDE12D;
 }
 
 @mixin weather-info-box {
-    height: 40vh;
+  height: 40vh;
   width: 40vw;
   max-width: 40vh;
   border: 1rem solid $main;

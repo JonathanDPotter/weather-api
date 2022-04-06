@@ -9,6 +9,7 @@ import { zipOrNav } from "../../store/slices/locationSlice";
 // styles
 import "./Hourly.scss";
 import HourCast from "../HourCast/HourCast";
+import Loading from "../Loading/Loading";
 
 const Hourly = () => {
   // get location data from redux
@@ -52,17 +53,20 @@ const Hourly = () => {
       );
   }, [weather]);
 
-  return (
+  return weather ? (
     <div className="hourly page">
       <h2 className="page-title">Hourly Forecast</h2>
-      {weather &&
-        hoursArray.map((hour, i) => {
-          const forecastHour = new Date(hour.time);
-          const now = new Date();
-          if (i < 24) {
-            return <HourCast weather={hour} key={`Hour${hour.time_epoch}`} />;
-          }
-        })}
+      {hoursArray.map((hour, i) => {
+        const forecastHour = new Date(hour.time);
+        const now = new Date();
+        if (i < 24) {
+          return <HourCast weather={hour} key={`Hour${hour.time_epoch}`} />;
+        }
+      })}
+    </div>
+  ) : (
+    <div className="page">
+      <Loading />
     </div>
   );
 };

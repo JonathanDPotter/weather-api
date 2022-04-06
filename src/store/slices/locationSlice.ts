@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// utils
-import { loadState } from "../localStorage";
 // interfaces
 import Icoords from "../../interfaces/coords";
 
@@ -15,19 +13,11 @@ interface IlocationSliceState {
   selectedLocation: zipOrNav;
 }
 
-const persistedState = loadState();
-
-const initialState = persistedState
-  ? ({
-      navCoords: persistedState.navCoords,
-      zipCoords: persistedState.zipCoords,
-      selectedLocation: zipOrNav.Nav,
-    } as IlocationSliceState)
-  : ({
-      navCoords: null,
-      zipCoords: null,
-      selectedLocation: zipOrNav.Nav,
-    } as IlocationSliceState);
+const initialState = {
+  navCoords: null,
+  zipCoords: null,
+  selectedLocation: zipOrNav.Nav,
+} as IlocationSliceState;
 
 const locationSlice = createSlice({
   name: "locationSlice",
