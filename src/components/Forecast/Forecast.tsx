@@ -52,6 +52,7 @@ const Forecast: FC<Iprops> = ({ forecast }) => {
         <h4>Winds up to:</h4>
         <p className="wind-speed">{maxwind_mph}mph</p>
       </div>
+      <br />
       <h4>{condition.text}</h4>
       <img src={condition.icon} alt={condition.text} />
     </div>

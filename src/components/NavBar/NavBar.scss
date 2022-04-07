@@ -2,27 +2,34 @@
 
 header {
   position: relative;
-  height: fit-content;
-  min-height: 20vh;
+  min-height: 25vh;
+  max-height: 25vh;
   width: 100vw;
   display: grid;
-  background-color: theme.$main;
+  background-color: theme.$dark;
   grid-template-areas:
     "title location location"
     "nav nav nav "
     "button ... ...";
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: theme.$compOne;
+  color: theme.$lightest;
   line-height: 2rem;
   align-items: end;
   justify-items: center;
 
   .title {
-    font-size: 2rem;
+    font-size: 1rem;
     grid-area: title;
+    justify-self: end;
+  }
+
+  .logo {
+    grid-area: title;
+    justify-self: start;
+    align-self: center;
   }
 
   nav {
@@ -57,9 +64,9 @@ input {
   width: 75%;
   max-width: 10rem;
   margin: 0.5rem auto;
-  border: 0.25rem solid theme.$compTwo;
+  border: 0.25rem solid theme.$lightest;
   border-radius: 0.25rem;
-  background-color: theme.$compOne;
-  color: theme.$compTwo;
-  box-shadow: 2px 2px 2px theme.$compOneShadow;
+  background-color: theme.$light;
+  color: theme.$lightest;
+  box-shadow: 2px 2px 2px theme.$darkest;
 }

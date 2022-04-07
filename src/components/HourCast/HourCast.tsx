@@ -10,20 +10,23 @@ interface Iprops {
 const HourCast: FC<Iprops> = ({ weather }) => {
   return (
     <div className="hour-cast">
-      <p className="title">
-        {`${new Date(weather.time).toLocaleDateString([], {
+      <p className="date day">
+        {new Date(weather.time).toLocaleDateString([], {
           month: "short",
           weekday: "short",
           day: "numeric",
-        })} ${new Date(weather.time)
+        })}
+      </p>{" "}
+      <p className="date time">
+        {new Date(weather.time)
           .toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           })
-          .replace(/^\b0/g, "")}`}
+          .replace(/^\b0/g, "")}
       </p>
       <p className="temperature">{weather.temp_f}&deg;</p>
-      <p className="description">{weather.condition.text}</p>
+      <p className="condition">{weather.condition.text}</p>
       {weather.chance_of_rain > 0 && (
         <p>Chance of Precipitation {weather.chance_of_rain}%</p>
       )}

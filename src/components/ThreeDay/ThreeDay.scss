@@ -2,5 +2,5 @@
 
 .three-day {
   @include theme.flex-column-center-space-evenly;
-  height: 200vh;
+  height: calc(55vh * 3 + 15vh);
 }

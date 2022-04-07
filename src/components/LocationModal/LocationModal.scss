@@ -1,11 +1,11 @@
 @use "../../theme";
 
 .location-fore {
-  background-color: theme.$main;
-  color: theme.$compTwo;
+  background-color: theme.$dark;
+  color: theme.$lightest;
   height: 40vh;
   width: 40vw;
-  border: 1rem solid theme.$compTwo;
+  border: 1rem solid theme.$lightest;
   border-radius: 1rem;
   @include theme.flex-column-center-center;
 
@@ -15,7 +15,7 @@
     @include theme.flex-column-center-space-evenly;
 
     label {
-      color: theme.$compOne;
+      color: theme.$light;
       font-size: 1rem;
       font-weight: 800;
     }

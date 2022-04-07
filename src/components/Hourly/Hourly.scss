@@ -2,5 +2,6 @@
 
 .hourly {
   @include theme.flex-column-center-space-evenly;
-  height: calc(24 * 50vh);
+  height: calc(55vh * 24 + 15vh);
+
 }

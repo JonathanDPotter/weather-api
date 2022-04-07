@@ -1,8 +1,8 @@
-$main: #f487b6;
-$compOne: #9046cf;
-$compOneShadow: #351551;
-$modalBack: rgba(53, 21, 81, 0.5);
-$compTwo: #fde12d;
+$lightest: #bfc8ad;
+$light: #90b494;
+$dark: #718f94;
+$darkest: #351551;
+$modalBack: rgba(84, 87, 117);
 
 @mixin flex-column-center-center {
   display: flex;
@@ -19,14 +19,15 @@ $compTwo: #fde12d;
 }
 
 @mixin weather-info-box {
-  height: 40vh;
-  width: 40vw;
-  max-width: 40vh;
-  border: 1rem solid $main;
+  height: 50vh;
+  width: 50vh;
+  max-width: 95vw;
+  border: 1rem solid $dark;
   border-radius: 1rem;
   padding: 1rem;
   @include flex-column-center-space-evenly;
-  background-color: $compTwo;
-  box-shadow: 5px 5px 5px $compOneShadow;
-  color: $compOne;
+  background-color: $lightest;
+  box-shadow: 5px 5px 5px $darkest;
+  color: $dark;
+  margin-top: 5vh;
 }

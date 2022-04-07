@@ -1,6 +1,6 @@
 import React from "react";
 // images
-import { ReactComponent as ImpLogo } from "../../images/pinkImpLogo.svg";
+import { ReactComponent as ImpLogo } from "../../images/bigImpLogo.svg";
 // styles
 import "./Loading.scss";
 

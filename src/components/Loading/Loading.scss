@@ -7,7 +7,7 @@
   h3 {
     font-size: 3rem;
     width: 10rem;
-    color: theme.$main;
+    color: theme.$dark;
     &:after {
       animation: ellipsis 1s infinite;
       content: "";

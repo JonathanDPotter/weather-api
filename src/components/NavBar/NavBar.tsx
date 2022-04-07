@@ -62,7 +62,8 @@ const NavBar = () => {
 
   return (
     <header>
-      <h1 className="title">{<ImpLogo height="2rem" />} Weather Imp</h1>
+      <ImpLogo height="1rem" className="logo"/>
+      <h1 className="title">Weather Imp</h1>
 
       <nav>
         <NavLink to="/">Home</NavLink>
