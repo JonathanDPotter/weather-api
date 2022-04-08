@@ -34,7 +34,6 @@ const login = async (user: InewUser) => {
 
 const getCurrent = async (coords: Icoords) => {
   const { latitude, longitude } = coords;
-  console.log(latitude, longitude);
   try {
     const response = await axios.get(
       `${baseUrl}api/weather/current/${latitude}/${longitude}`
@@ -47,7 +46,6 @@ const getCurrent = async (coords: Icoords) => {
 
 const getThreeDay = async (coords: Icoords) => {
   const { latitude, longitude } = coords;
-  console.log(latitude, longitude);
   try {
     const response = await axios.get(
       `${baseUrl}api/weather/three-day/${latitude}/${longitude}`

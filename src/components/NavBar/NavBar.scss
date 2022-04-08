@@ -11,25 +11,62 @@ header {
     "title location location"
     "nav nav nav "
     "button ... ...";
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: 700;
   color: theme.$lightest;
   line-height: 2rem;
-  align-items: end;
+  align-items: center;
   justify-items: center;
 
-  .title {
-    font-size: 1rem;
-    grid-area: title;
-    justify-self: end;
+  @media (max-width: 650px) {
+    font-size: 1.2rem;
+    grid-template-areas:
+      "title title"
+      "location location"
+      " nav nav "
+      "button button";
+    .logo {
+      height: 1.2rem !important;
+    }
   }
 
-  .logo {
+  @media (min-width: 650px) {
+    .active {
+      text-underline-offset: 8px !important;
+    }
+  }
+
+  @media (min-width: 600px) and (orientation: landscape) {
+    grid-template-areas:
+      "title location location button"
+      "nav nav nav ... ";
+    button {
+      height: 3rem;
+    }
+  }
+
+  .title {
+    display: flex;
+    align-items: flex-end;
     grid-area: title;
-    justify-self: start;
-    align-self: center;
+
+    h1 {
+      font-size: 2rem;
+      margin-left: 0.5rem;
+    }
+
+    .logo {
+      height: 2rem;
+    }
+    @media (min-width: 800px) {
+      h1 {
+        font-size: 3rem;
+      }
+
+      .logo {
+        height: 3rem;
+      }
+    }
   }
 
   nav {

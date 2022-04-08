@@ -3,4 +3,13 @@
 .three-day {
   @include theme.flex-column-center-space-evenly;
   height: calc(55vh * 3 + 15vh);
+
+  @media (min-width: 600px) and (orientation: landscape) {
+    height: calc(55vw * 3 + 15vw);
+  }
+
+  @media (min-width: 1000px) {
+    height: 75vh;
+    flex-direction: row;
+  }
 }

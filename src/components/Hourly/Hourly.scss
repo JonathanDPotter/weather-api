@@ -4,4 +4,37 @@
   @include theme.flex-column-center-space-evenly;
   height: calc(55vh * 24 + 15vh);
 
+  @media (min-width: 600px) and (orientation: landscape) {
+    height: calc(55vw * 24 + 15vw);
+  }
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: calc(55vh * 12 + 15vh);
+  }
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: calc(55vh * 8 + 15vh);
+  }
+
+    @media (min-width: 1200px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: calc(55vh * 6 + 15vh);
+  }
+
+    @media (min-width: 1500px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: calc(55vh * 24/5 + 15vh);
+  }
+
+    @media (min-width: 1800px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: calc(55vh * 4 + 15vh);
+  }
 }

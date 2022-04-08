@@ -21,13 +21,18 @@ $modalBack: rgba(84, 87, 117);
 @mixin weather-info-box {
   height: 50vh;
   width: 50vh;
-  max-width: 95vw;
+  max-height: 300px;
+  max-width: 300px;
   border: 1rem solid $dark;
   border-radius: 1rem;
   padding: 1rem;
   @include flex-column-center-space-evenly;
   background-color: $lightest;
   box-shadow: 5px 5px 5px $darkest;
-  color: $dark;
   margin-top: 5vh;
+  color: $dark;
+  @media (min-width: 600px) and (orientation: landscape) {
+    height: 50vw;
+    width: 50vw;
+  }
 }

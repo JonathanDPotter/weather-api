@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 // components
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
+import Loading from "../Loading/Loading";
 // utils
 import { useAppSelector } from "../../store/hooks";
 import { zipOrNav } from "../../store/slices/locationSlice";
+import api from "../../api";
 // interfaces
 import Icoords from "../../interfaces/coords";
+import Icurrent from "../../interfaces/current";
 // styles
 import "./Home.scss";
-import api from "../../api";
-import Icurrent from "../../interfaces/current";
-import Loading from "../Loading/Loading";
 
 const Home = () => {
   // get location data from redux
