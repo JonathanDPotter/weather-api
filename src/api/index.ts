@@ -2,7 +2,7 @@ import axios from "axios";
 import Icoords from "../interfaces/coords";
 import { InewUser } from "../interfaces/user";
 
-const baseUrl = `http://localhost:1337/`;
+const baseUrl = `https://jonathan-potter-weather-api.herokuapp.com/`;
 
 const getCity = async (lat: string, lon: string) => {
   try {
