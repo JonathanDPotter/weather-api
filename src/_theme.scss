@@ -2,7 +2,7 @@ $lightest: #bfc8ad;
 $light: #90b494;
 $dark: #718f94;
 $darkest: #351551;
-$modalBack: rgba(84, 87, 117);
+$modalBack: rgba(84, 87, 117, .4);
 
 @mixin flex-column-center-center {
   display: flex;

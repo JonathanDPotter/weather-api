@@ -90,20 +90,7 @@ header {
   .location {
     grid-area: location;
   }
-}
-.zip-nav {
-  grid-area: button;
-}
-
-button,
-input {
-  height: 2rem;
-  width: 75%;
-  max-width: 10rem;
-  margin: 0.5rem auto;
-  border: 0.25rem solid theme.$lightest;
-  border-radius: 0.25rem;
-  background-color: theme.$light;
-  color: theme.$lightest;
-  box-shadow: 2px 2px 2px theme.$darkest;
+  .zip-nav {
+    grid-area: button;
+  }
 }
