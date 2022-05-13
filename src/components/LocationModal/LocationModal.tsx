@@ -48,6 +48,7 @@ const LocationModal: FC<Iprops> = ({ closeModal, setUseZipCoords }) => {
               id="zipcode"
               onChange={handleChange}
               value={zipcode}
+              autoFocus
             />
             <input type="submit" className="btn" value="Go!" />
           </form>
