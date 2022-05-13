@@ -39,7 +39,7 @@ const Home = () => {
 
   return weather ? (
     <div className="home page">
-      <h2 className="page-title">Welcome to Weather Imp</h2>
+      <h2 className="page-title">Current Weather</h2>
       <WeatherInfo title="Current" weather={weather} />
     </div>
   ) : (

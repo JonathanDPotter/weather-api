@@ -68,7 +68,7 @@ const NavBar = () => {
       </div>
 
       <nav>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">Current</NavLink>
         <NavLink to="/hourly">Hourly</NavLink>
         <NavLink to="/threeday">3 Day Forecast</NavLink>
       </nav>
