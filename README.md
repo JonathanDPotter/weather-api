@@ -9,3 +9,5 @@ The app is written in typescript with react. It uses react router, redux, axios 
 ## functionality
 
 On the home page a user can choose to use their device location or enter a US zip code. The home page displays the current weather conditions for that location. A user can navigate to the three-day forecast or hourly forecast pages to get those forecasts as well.
+
+![image](https://user-images.githubusercontent.com/30156468/168269039-6d2cb122-5ead-45ee-9db3-3a6d7df38ed0.png)
