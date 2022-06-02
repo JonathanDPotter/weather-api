@@ -1,6 +1,6 @@
 # Weather-Imp
 
-I made this app to practice consuming a third-party api. This is the front-end. There is also a back-end express app that handles the api calls. The back-end repo is [here](https://github.com/JonathanDPotter/weather-api-back), and it is hosted on Heroku [here](https://weather-l95e66yd3-jonathandpotter.vercel.app/).
+I made this app to practice consuming a third-party api. This is the front-end. There is also a back-end express app that handles the api calls. The back-end repo is [here](https://github.com/JonathanDPotter/weather-api-back), and this app is hosted on vercel [here](https://weather-l95e66yd3-jonathandpotter.vercel.app/).
 
 ---
 
