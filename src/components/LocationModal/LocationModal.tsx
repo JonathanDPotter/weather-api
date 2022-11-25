@@ -27,13 +27,16 @@ const LocationModal: FC<Iprops> = ({ closeModal, setUseZipCoords }) => {
     setFormState({ ...formState, [id]: value });
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    api.geoapify
-      .getCoordsFromZip(zipcode)
-      .then((result) => result && dispatch(setZipCoords(result)));
-    setUseZipCoords();
-    closeModal();
+    const result = await api.geoapify.getCoordsFromZip(zipcode);
+    if (result.longitude) {
+      dispatch(setZipCoords(result));
+      setUseZipCoords();
+      closeModal();
+    } else {
+      window.alert("Invalid zipcode");
+    }
   };
 
   if (portal) {
